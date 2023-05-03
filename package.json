@@ -1,0 +1,17 @@
+{
+  "name": "webcrawlerhttp",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": "https://github.com/wemersonnino/webcrawlerhttp.git",
+  "author": "Wemerson Nino <wemersonnino@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "description": "Project for the Learn HTTP course",
+  "scripts": {
+    "start": "node main.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "29.5.0"
+  }
+}
