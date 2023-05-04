@@ -1,3 +1,45 @@
+
+const { url } = require('inspector');
+const { JSDOM } = require('jsdom')
+
+/**
+ * 
+ * @param htmlBody para capturar o corpo html em formato string
+ * @param baseURL  ira representar a URL que estamos rastrando
+ * essa function retorn um array  com representacoes das URLs que encontrar
+ */
+function getURLsFromHTML(htmlBody, baseURL){
+    const URLs = [];
+    const dom = new JSDOM(htmlBody)
+    const linkElements = dom.window.document.querySelectorAll('a')
+    for(const linkElement of linkElements){
+        //console.log(linkElement.href);
+        if (linkElement.href.slice(0,1) === '/') {
+            //relative
+            try{
+                const urlObj = new URL(`${baseURL}${linkElement.href}`)
+                URLs.push(urlObj.href)
+            } catch(err){
+                console.log(`Error with relative url: ${err.message}`)
+            }
+        }
+        else{
+            //absolute
+            try {
+                const urlObj = new URL(linkElement.href)
+                URLs.push(urlObj.href)
+            } catch (error) {
+                console.log(`Error with absolute url: ${error.message}`)
+            }
+        }
+        //URLs.push(linkElement.href)
+    }
+
+
+    return URLs
+
+}
+
 /*
     function realized test using jest.
     pego a class URL para usar os seus metodos para editar toda url
@@ -19,5 +61,6 @@ function normalizeURL(urlString){
 }
 
 module.exports = {
-    normalizeURL
+    normalizeURL,
+    getURLsFromHTML
 }
