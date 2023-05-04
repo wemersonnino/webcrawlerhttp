@@ -1,3 +1,5 @@
+const { crawlPage } = require('./crawl.js')
+
 function main(params) {
     if (process.argv.length < 3) {
         console.log('no website provided!');
@@ -11,6 +13,7 @@ function main(params) {
     const baseURL = process.argv[2]
 
     console.log(`starting crawl ${baseURL}`);
+    crawlPage(baseURL)
 }
 
 main()

@@ -2,6 +2,15 @@
 const { url } = require('inspector');
 const { JSDOM } = require('jsdom')
 
+
+async function crawlPage(currentURL){
+    console.log(`actively crawling: ${currentURL}`);
+
+    const resp = await fetch(currentURL);
+
+    console.log(await resp.text());
+}
+
 /**
  * 
  * @param htmlBody para capturar o corpo html em formato string
@@ -62,5 +71,6 @@ function normalizeURL(urlString){
 
 module.exports = {
     normalizeURL,
-    getURLsFromHTML
+    getURLsFromHTML,
+    crawlPage
 }
